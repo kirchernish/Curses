@@ -14,7 +14,6 @@ items, store = [], []
 print("#Для перехода к следующему этапу отправьте пустую строку, записывайте копейки через точку#")
 print("Введите список покупок")
 items = Inputing(items) 
-# print(items)
 print('Введите магазины в которых вы хотите закупиться')
 store = Inputing(store)
 ans = []
@@ -24,6 +23,8 @@ for numStore in range(len(store)):
     for item in range(len(items)):
         price += float(input(f'{items[item]}: '))
     ans += [[price, store[numStore]]]
+for i in range(len(ans)):
+    print(f'{ans[i][1]}:{ans[i][0]:.2f} рублей')
 ans.sort(key=lambda x: x[0])
 print(f"Я вам советую закупить ваши товары в магазине {ans[0][1]}, ведь вы потратите {ans[0][0]:.2f} рублей")
     
