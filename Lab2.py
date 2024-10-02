@@ -1,23 +1,29 @@
 import sys
-db, priceStore = [], []
-print("Вписывайте список покупок")
-ipt = '[]'
-while ipt != '':
-    ipt = sys.stdin.readline()
-    ipt = ipt.rstrip()
-    if ipt == '': break
-    if ipt.count(',') > 0: db.append(ipt.split(','))
-    else: db.append(ipt) 
-# print(db)
 
-for i in range(len(db)):
-    product = db[i]
-    print(f'Введите цены и магазины для {db[i]}')
-    ipt = '[]'
-    while  ipt != '':     
-        ipt = sys.stdin.readline()
-        ipt = ipt.rstrip()
-        priceStore+=[i,ipt.split(',')]
-# print(db)
-# print(priceStore)
+def Inputing(db):
+    line = '[]'
+    while line != '':
+        line = sys.stdin.readline()
+        line = line.rstrip()
+        if line == '': break
+        if line.count(',') > 0: db.append(line.split(','))
+        else: db.append(line)
+    return db
+
+items, store = [], []
+print("#Для перехода к следующему этапу отправьте пустую строку, записывайте копейки через точку#")
+print("Введите список покупок")
+items = Inputing(items) 
+# print(items)
+print('Введите магазины в которых вы хотите закупиться')
+store = Inputing(store)
+ans = []
+for numStore in range(len(store)):
+    print(f'Напишите цены в маназине "{store[numStore]}" для: ')
+    price = 0
+    for item in range(len(items)):
+        price += float(input(f'{items[item]}: '))
+    ans += [[price, store[numStore]]]
+ans.sort(key=lambda x: x[0])
+print(f"Я вам советую закупить ваши товары в магазине {ans[0][1]}, ведь вы потратите {ans[0][0]:.2f} рублей")
     
